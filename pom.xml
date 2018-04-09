@@ -149,6 +149,17 @@
                 </configuration>
             </plugin>
         </plugins>
+
     </build>
 
+	<developers>
+	<developer>
+		<name>Vinicius</name>
+		<email>teste</email>
+	</developer>
+
+
+
+
+	</developers>
 </project>
