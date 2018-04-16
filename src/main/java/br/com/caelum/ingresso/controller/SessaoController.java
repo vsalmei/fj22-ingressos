@@ -29,6 +29,20 @@ public class SessaoController {
 	@Autowired
 	private SessaoDao sessaoDao;
 	
+	
+	@GetMapping("/admin/sessao")
+	public ModelAndView form(@RequestParam("salaId") Integer salaId, SessaoForm form) {
+		
+		form.setSalaId(salaId);
+		
+		ModelAndView modelAndView = new ModelAndView("sessao/sessao");
+		
+		modelAndView.addObject("sala",salaDao.findOne(salaId));
+		modelAndView.addObject("filmes",filmeDao.findAll());
+		modelAndView.addObject("form", form);
+		return modelAndView;
+	}
+	
 	@PostMapping("/admin/sessao")
 	@Transactional
 	public ModelAndView salva(@Valid SessaoForm form, BindingResult result){
@@ -39,15 +53,12 @@ public class SessaoController {
 	
 	sessaoDao.save(sessao);
 	
-	return new ModelAndView("redirect:/admin/sala" + form.getSalaId() + "/sessoes");
+	return new ModelAndView("redirect:/admin/sala/" + form.getSalaId() + "/sessoes");
 	
 		
 	}
 
-	private ModelAndView form(Integer salaId, SessaoForm form) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 	
 
 }
